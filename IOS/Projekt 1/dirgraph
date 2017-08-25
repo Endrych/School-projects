@@ -1,0 +1,191 @@
+#!/bin/sh
+
+# Datum:       25.03.2017
+# Autor:       David Endrych,xendry02@stud.fit.vutbr.cz
+# Projekt:     IOS projekt 1 - dirgraph
+
+#Pomocne promene pro prepinace apod.
+hist_norm='false'
+file_ere='.'
+directory='.'
+i_set=""
+POSIXLY_CORRECT=yes
+
+#Tisk mrizek histogramu
+sharp_printer(){
+  j=0
+  pocet=$1
+  while [ $j -lt $pocet ]
+  do
+    printf "#"
+    j=$((j+1))
+  done
+  echo ""
+}
+
+#Nastaveni normalizace pro histogram velikosti souboru
+fsize_n(){
+ max=1
+ 
+ #Zjistovani maxima
+ if [ $l100B -gt $max ];then
+    max=$l100B
+ fi
+ if [ $l1KiB -gt $max ];then
+    max=$l1KiB
+ fi
+ if [ $l10KiB -gt $max ];then
+    max=$l10KiB
+ fi
+ if [ $l100KiB -gt $max ];then
+    max=$l100KiB
+ fi
+ if [ $l1MiB -gt $max ];then
+    max=$l1MiB
+ fi
+ if [ $l10MiB -gt $max ];then
+    max=$l10MiB
+ fi
+ if [ $l100MiB -gt $max ];then
+    max=$l100MiB
+ fi
+ if [ $l1GiB -gt $max ];then
+    max=$l1GiB
+ fi
+ if [ $b1GiB -gt $max ];then
+    max=$b1GiB
+ fi
+ #Nastaveni maximalni delky radku
+ if [ $max -gt $max_length ];then
+    max_l=$((max_length-12))
+ else
+    max_l=max
+ fi
+ 
+ l100B=$(($l100B*$max_l/$max))
+ l1KiB=$(($l1KiB*$max_l/$max))
+ l10KiB=$(($l10KiB*$max_l/$max))
+ l100KiB=$(($l100KiB*$max_l/$max))
+ l1MiB=$(($l1MiB*$max_l/$max))
+ l10MiB=$(($l10MiB*$max_l/$max))
+ l100MiB=$(($l100MiB*$max_l/$max))
+ l1GiB=$(($l1GiB*$max_l/$max))
+ b1GiB=$(($b1GiB*$max_l/$max))
+ 
+ #Presmerovani na vypis histogramu
+ fsize_hist
+}
+
+#Vypis file size histogramu
+fsize_hist(){
+  printf "  <100 B  : "
+  sharp_printer $l100B
+  printf "  <1 KiB  : "
+  sharp_printer $l1KiB
+  printf "  <10 KiB : "
+  sharp_printer $l10KiB
+  printf "  <100 KiB: "
+  sharp_printer $l100KiB
+  printf "  <1 MiB  : "
+  sharp_printer $l1MiB
+  printf "  <10 MiB : "
+  sharp_printer $l10MiB
+  printf "  <100 MiB: "
+  sharp_printer $l100MiB
+  printf "  <1 GiB  : "
+  sharp_printer $l1GiB
+  printf "  >=1 GiB : "
+  sharp_printer $b1GiB
+}
+
+#Nacitani argumentu
+while getopts :ni: o;
+do
+  case "$o" in
+	i)
+      if [ "$i_set" == '-v' ];then
+        echo "Prepinac -i je jiz nastaven" >&2
+        exit 1
+      fi
+	    file_ere=${OPTARG}
+            i_set='-v'
+	    ;;
+	n)
+			if [ "$hist_norm" == 'true' ];then
+        echo "Prepinac -n je jiz nastaven" >&2
+        exit 1
+      fi
+	    hist_norm='true'
+	    ;;
+	:)
+      echo "Prepinac -i vyzaduje argument" >&2
+	    exit 1
+	    ;;
+	*)
+	    echo "Spatna syntax: dirgraph [-i FILE_ERE] [-n] [DIR]" >&2
+	    exit 1
+   esac
+done
+shift $((OPTIND-1))
+
+#Kontrola nastaveneho adresare
+if [ ! -z "$*" ];then
+ if [ -d $* ];then
+   directory=$*
+ else
+   echo "Nejedna se o slozku" >&2
+   exit 1
+ fi
+fi
+
+#Nastaveni maximalni delky radku
+if [ "$hist_norm" == 'true' ];then
+    if [ -t 0 ];then
+       max_length=$(tput cols)
+    else
+       max_length=79
+    fi
+fi
+max_length=$((max_length-1))
+file_ere=$(printf "%s" $file_ere | sed -e 's/\^/\//')
+
+#Ziskani promenych
+directories=$(find -H ${directory} -type d | egrep ${file_ere} ${i_set}  |  wc -l)
+all_files=$(find -H ${directory} -type f | egrep ${file_ere} ${i_set} | wc -l)
+l100B=$(find -H ${directory} -type f -size -100c | egrep ${file_ere} ${i_set} | wc -l)
+l1KiB=$(find -H ${directory} -type f -size +99c -size -1024c | egrep ${file_ere} ${i_set} | wc -l)
+l10KiB=$(find -H ${directory} -type f -size +1023c -size -10240c | egrep ${file_ere} ${i_set} | wc -l)
+l100KiB=$(find -H ${directory} -type f -size +10239c -size -102400c | egrep ${file_ere} ${i_set} | wc -l)
+l1MiB=$(find -H ${directory} -type f -size +102399c -size -1048576c | egrep ${file_ere} ${i_set} | wc -l)
+l10MiB=$(find -H ${directory} -type f -size +1048575c -size -10485760c | egrep ${file_ere} ${i_set} | wc -l)
+l100MiB=$(find -H ${directory} -type f -size +10485759c -size -104857600c | egrep ${file_ere} ${i_set} | wc -l)
+l1GiB=$(find -H ${directory} -type f -size +104857599c -size -1073741824c | egrep ${file_ere} ${i_set} | wc -l)
+b1GiB=$(find -H ${directory} -type f -size +1073741823c | egrep ${file_ere} ${i_set} | wc -l)
+
+#Kontrola regularniho vyrazu na root
+if [ $directories -eq 0 ];then
+		echo "Prepinac -i pokryva root adresar" >&2
+	exit 1
+fi
+
+#Vypis
+echo "Root directory: ${directory}"
+printf "Directories: %s\n" ${directories}
+printf "All files: %s\n" ${all_files}
+echo "File size histogram:"
+ if [ $hist_norm == 'true' ];then
+    fsize_n
+ else
+    fsize_hist
+fi
+
+echo "File type histogram:"
+if [ $all_files -eq 0 ];then
+   exit 0
+fi
+
+if [ $hist_norm == 'true' ];then
+				find -H ${directory} -type f | egrep ${file_ere} ${i_set} | tr "\n" "\0" | xargs -0 file -b | tr "\n" "\0" | xargs -0 printf "%.40s\n" | sort | uniq -c | sort -n -r | head -n 10 | sed "s/ *//" | awk 'BEGIN{max_l='${max_length}';max_l=max_l - 47;iterace=0;max=0}{if(iterace == 0) {max=$1;if(max_l > max){max_l=max;};iterace=1;};len=0;printf "  ";for(i=2;i<NF;i++){printf "%s ",$i;lenARG=length($i);len=((len+lenARG+1))};printf $NF;lNF=length($NF);len=((lNF+len));for(j=len;j<40;j++){printf " "};if(len > 38) {printf "...";} else {printf "   ";};printf ": ";tisk=int(($1*max_l)/max);for(j=0;j<tisk;j++){printf "#"};printf "\n"}'
+else
+ find -H ${directory} -type f | egrep ${file_ere} ${i_set} | tr "\n" "\0" | xargs -0 file -b | tr "\n" "\0" | xargs -0 printf "%.40s\n" | sort | uniq -c | sort -n -r | head -n 10 | sed "s/ *//" | awk '{len=0;printf "  ";for(i=2;i<NF;i++){printf "%s ",$i;lenARG=length($i);len=((len+lenARG+1))};printf $NF;lNF=length($NF);len=((lNF+len));for(j=len;j<40;j++){printf " "};if(len > 38) {printf "...";} else {printf "   ";};printf ": ";for(j=0;j<$1;j++){printf "#"};printf "\n"}'
+fi
