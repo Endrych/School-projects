@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<program language="IPPcode18">
+ <instruction order="1" opcode="DEFVAR">
+  <arg1 type="var">GF@counter</arg1>
+ </instruction>
+ <instruction order="2" opcode="NOT">
+  <arg1 type="var">GF@counter</arg1>
+  <arg2 type="bool">false</arg2>
+ </instruction>
+ <instruction order="3" opcode="WRITE">
+  <arg1 type="var">GF@counter</arg1>
+ </instruction>
+ <instruction order="4" opcode="NOT">
+  <arg1 type="var">GF@counter</arg1>
+  <arg2 type="bool">true</arg2>
+ </instruction>
+ <instruction order="5" opcode="WRITE">
+  <arg1 type="var">GF@counter</arg1>
+ </instruction>
+ <instruction order="6" opcode="NOT">
+  <arg1 type="var">GF@counter</arg1>
+  <arg2 type="var">GF@counter</arg2>
+ </instruction>
+ <instruction order="7" opcode="WRITE">
+  <arg1 type="var">GF@counter</arg1>
+ </instruction>
+ <instruction order="8" opcode="NOT">
+  <arg1 type="var">GF@counter</arg1>
+  <arg2 type="var">GF@counter</arg2>
+ </instruction>
+ <instruction order="9" opcode="WRITE">
+  <arg1 type="var">GF@counter</arg1>
+ </instruction>
+</program>

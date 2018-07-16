@@ -1,0 +1,17 @@
+.IPPcode18
+DEFVAR GF@counter
+DEFVAR GF@type
+MOVE GF@counter int@10
+type GF@type GF@counter
+write GF@type
+
+
+type GF@type int@6
+write GF@type
+
+type GF@type bool@false
+write GF@type
+
+MOVE GF@counter bool@true
+type GF@type  GF@counter
+write GF@type

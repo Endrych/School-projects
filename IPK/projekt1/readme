@@ -1,0 +1,13 @@
+Spouštění:
+./ipk-client -h host -p port [-r|-w] file
+host (IP adresa nebo fully-qualified DNS name) identifikace serveru jakožto koncového bodu komunikace klienta;
+port číslo portu
+-r čtení ze serveru
+-w zápis na server
+file (cesta) Cesta k souboru u klienta
+
+./ipk-server -p port                     
+port číslo portu
+
+Omezení:
+Maximálně připojených 200 klientů, z důvodu omezení sdílené paměti, kde se ukládají hashe názvů souboru.

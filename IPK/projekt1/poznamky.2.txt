@@ -1,0 +1,167 @@
+Status Codes
+-------------
+Zahajeni cteni
+Zahajeni zapisu
+Data prijata 
+Posilani dat
+Poslana posledni cast souboru
+Ukonceni spojeni
+
+
+Funkcionalita
+--------------
+Klient -> server 
+Status code - Zahajeni cteni/zapisu 6 b
+Delka nazvu 1 B
+Nazev - [N] B
+Delka dat - 10 b
+Data - Nic pri cteni, N pri zapisu
+
+Server -> Klient, Klient -> Server
+Status code - Data prijata / Posilani dat
+Delka dat - 10 b udava kolik dat bylo prijato / kolik se posila
+Delka nazvu 1 B
+Nazev - [N] B
+Data - N pri cteni, 0 pri zapisu
+
+Konec
+Cteni 
+______
+server->klient
+Status code - Poslana posledni cast souboru
+Pokud sedi data uzavreni souboru posle se socket se statusem Ukonceni spojeni
+
+
+Zapis
+_______
+klient->server
+status code - Poslana posledni cast souboru
+Server->klient
+Pokud sedi data uzavreni souboru posle se socket se statusem Ukonceni spojeni	
+
+
+
+Status Codes
+-------------
+Zahajeni cteni
+Zahajeni zapisu
+Data prijata 
+Posilani dat
+Poslana posledni cast souboru
+Ukonceni spojeni
+
+
+Funkcionalita
+--------------
+Klient -> server 
+Status code - Zahajeni cteni/zapisu 6 b
+Delka nazvu 1 B
+Nazev - [N] B
+Delka dat - 10 b
+Data - Nic pri cteni, N pri zapisu
+
+Server -> Klient, Klient -> Server
+Status code - Data prijata / Posilani dat
+Delka dat - 10 b udava kolik dat bylo prijato / kolik se posila
+Delka nazvu 1 B
+Nazev - [N] B
+Data - N pri cteni, 0 pri zapisu
+
+Konec
+Cteni 
+______
+server->klient
+Status code - Poslana posledni cast souboru
+Pokud sedi data uzavreni souboru posle se socket se statusem Ukonceni spojeni
+
+
+Zapis
+_______
+klient->server
+status code - Poslana posledni cast souboru
+Server->klient
+Pokud sedi data uzavreni souboru posle se socket se statusem Ukonceni spojeni	
+
+Status Codes
+-------------
+Zahajeni cteni
+Zahajeni zapisu
+Data prijata 
+Posilani dat
+Poslana posledni cast souboru
+Ukonceni spojeni
+
+
+Funkcionalita
+--------------
+Klient -> server 
+Status code - Zahajeni cteni/zapisu 6 b
+Delka nazvu 1 B
+Nazev - [N] B
+Delka dat - 10 b
+Data - Nic pri cteni, N pri zapisu
+
+Server -> Klient, Klient -> Server
+Status code - Data prijata / Posilani dat
+Delka dat - 10 b udava kolik dat bylo prijato / kolik se posila
+Delka nazvu 1 B
+Nazev - [N] B
+Data - N pri cteni, 0 pri zapisu
+
+Konec
+Cteni 
+______
+server->klient
+Status code - Poslana posledni cast souboru
+Pokud sedi data uzavreni souboru posle se socket se statusem Ukonceni spojeni
+
+
+Zapis
+_______
+klient->server
+status code - Poslana posledni cast souboru
+Server->klient
+Pokud sedi data uzavreni souboru posle se socket se statusem Ukonceni spojeni	
+
+
+
+Status Codes
+-------------
+Zahajeni cteni
+Zahajeni zapisu
+Data prijata 
+Posilani dat
+Poslana posledni cast souboru
+Ukonceni spojeni
+
+
+Funkcionalita
+--------------
+Klient -> server 
+Status code - Zahajeni cteni/zapisu 6 b
+Delka nazvu 1 B
+Nazev - [N] B
+Delka dat - 10 b
+Data - Nic pri cteni, N pri zapisu
+
+Server -> Klient, Klient -> Server
+Status code - Data prijata / Posilani dat
+Delka dat - 10 b udava kolik dat bylo prijato / kolik se posila
+Delka nazvu 1 B
+Nazev - [N] B
+Data - N pri cteni, 0 pri zapisu
+
+Konec
+Cteni 
+______
+server->klient
+Status code - Poslana posledni cast souboru
+Pokud sedi data uzavreni souboru posle se socket se statusem Ukonceni spojeni
+
+
+Zapis
+_______
+klient->server
+status code - Poslana posledni cast souboru
+Server->klient
+Pokud sedi data uzavreni souboru posle se socket se statusem Ukonceni spojeni	

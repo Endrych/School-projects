@@ -1,0 +1,37 @@
+.IPPcode18
+createframe
+call main
+
+label factorial
+pushframe
+defvar LF@retval
+defvar LF@cond
+lt LF@cond LF@n int@1
+jumpifeq if_false  LF@cond bool@true
+defvar LF@help
+sub LF@help LF@n int@1
+createframe
+defvar TF@n
+move TF@n LF@n
+call factorial
+move LF@retval TF@retval 
+mul LF@retval TF@n LF@retval 
+jump factorial_end
+label if_false
+move LF@retval int@1
+label factorial_end
+popframe
+return
+
+
+label main
+pushframe
+DEFVAR LF@start
+READ LF@start int
+createframe
+defvar TF@n
+move TF@n LF@start
+call factorial
+write TF@retval
+popframe
+label main_end

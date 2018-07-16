@@ -1,0 +1,6 @@
+.IPPcode18
+DEFVAR GF@counter
+DEFVAR GF@number
+MOVE GF@number int@-10
+idiv GF@counter GF@number int@0
+write GF@counter

@@ -1,0 +1,9 @@
+.IPPcode18
+DEFVAR GF@counter
+MOVE GF@counter int@42
+pushs GF@counter
+write GF@counter
+MOVE GF@counter int@64
+wrIte GF@counter
+pops GF@counter
+write GF@counter

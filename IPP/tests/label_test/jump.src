@@ -1,0 +1,8 @@
+.IPPcode18
+DEFVAR GF@counter
+MOVE GF@counter int@0
+label test
+write GF@counter
+add GF@counter GF@counter int@1
+jumpifeq test GF@counter int@1
+jumpifeq test GF@counter int@2

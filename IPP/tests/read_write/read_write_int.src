@@ -1,0 +1,5 @@
+#
+.IPPcode18
+DEFVAR GF@counter
+READ GF@counter int
+write GF@counter

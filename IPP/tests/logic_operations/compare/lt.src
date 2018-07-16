@@ -1,0 +1,22 @@
+.IPPcode18
+DEFVAR GF@counter
+lt GF@counter bool@false bool@true
+write GF@counter
+
+lt GF@counter  bool@false GF@counter
+write GF@counter
+
+lt GF@counter bool@true bool@true
+write GF@counter
+
+lt GF@counter bool@true bool@false
+write GF@counter
+
+lt GF@counter int@4 int@4
+write GF@counter
+
+lt GF@counter int@6 int@4
+write GF@counter
+
+lt GF@counter int@4 int@6
+write GF@counter
